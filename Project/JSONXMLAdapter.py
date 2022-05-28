@@ -1,5 +1,5 @@
 from CommunicationBus import CommBus
-import json
+import json, xmltodict
 
 sviZahtevi = CommBus().sendToJSON()
 xmlZahtevi = []
@@ -42,3 +42,10 @@ for zahtev in sviZahtevi:
 #ISPIS
 for xmlZahtev in xmlZahtevi:
     print(xmlZahtev + "\n")
+
+
+
+class JSON2XML:
+    def ConvertToJSON(text):
+        xmldict = xmltodict.parse(text)
+        return json.dumps(xmldict)
