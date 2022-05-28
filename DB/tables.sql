@@ -1,33 +1,29 @@
-drop table korisnik;
-drop table student;
-drop table profesor;
+create database if not exists res;
+use res;
 
-create table korisnik(
-    id integer not null,
-    name varchar2(50) not null,
-    lastname varchar2(50) not null,
-    username varchar2(50) not null unique,
-    email varchar2(50) not null check (email like '%@%.%') unique,
-    constraint id_pk primary key (id)
+create table if not exists korisnik(
+    id integer primary key,
+    name varchar(50) not null,
+    lastname varchar(50) not null,
+    username varchar(50) not null unique,
+    email varchar(50) not null unique check (email like '%@%.%')
 );
 
-create table student(
-    ind varchar2(10) not null,
-    name varchar2(50) not null,
-    lastname varchar2(50) not null,
-    username varchar2(50) not null unique,
-    email varchar2(50) check (email like '%@%.%') not null unique,
-    year_of_study integer not null,
-    constraint ind_pk primary key (ind)
+create table if not exists student(
+    id varchar(10) primary key,
+    name varchar(50) not null,
+    lastname varchar(50) not null,
+    username varchar(50) not null unique,
+    email varchar(50)  not null unique check (email like '%@%.%'),
+    year_of_study integer not null
 );
 
-create table profesor(
-    id integer not null,
-    name varchar2(50) not null,
-    lastname varchar2(50) not null,
-    username varchar2(50) not null unique,
-    email varchar2(50) check (email like '%@%.%') not null unique,
-    department varchar2(50) not null,
-    constraint idp_pk primary key (id)
+create table if not exists profesor(
+    id integer primary key,
+    name varchar(50) not null,
+    lastname varchar(50) not null,
+    username varchar(50) not null unique,
+    email varchar(50)  not null unique check (email like '%@%.%'),
+    department varchar(50) not null
 );
 
