@@ -1,6 +1,4 @@
-from cmath import e
 from mysql.connector import Error
-from typing import Tuple
 import unittest
 
 from Repository import read_items
@@ -13,6 +11,8 @@ class TestRepository(unittest.TestCase):
         self.assertAlmostEqual(execute_rest("update korisnik set name = 'zika' where lastname='mikic';"), 1)
         self.assertAlmostEqual(execute_rest("delete from korisnik where id=6;"), 1)
 
-    # def test_query_value(self):
-    #     self.assertRaises(Error, read_items, True)
-    #     self.assertRaises(Error, execute_rest, True)
+    def test_query_value(self):
+        # self.assertRaises(Error, read_items, True)
+        # self.assertRaises(Error, execute_rest, True)
+        self.assertRaises(Exception, read_items, True)
+        self.assertRaises(Exception, execute_rest, True)
