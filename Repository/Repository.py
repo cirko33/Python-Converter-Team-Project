@@ -1,10 +1,5 @@
-from cmath import e
-from multiprocessing import connection
-from types import NoneType
-import unittest
 import mysql.connector
 from mysql.connector import Error
-from setuptools import find_namespace_packages
 
 def read_items(query):
     connection = mysql.connector.connect(host="localhost", database="res", user="res_projekat", password="restim20")
@@ -12,7 +7,7 @@ def read_items(query):
         cursor = connection.cursor()
         try:
             cursor.execute(query)
-        except Error:
+        except Exception:
             cursor.close()
             connection.close()
             raise Exception("Not valid query for reading data")
@@ -43,4 +38,3 @@ def execute_rest(query):
         return retVal
     else:
         raise Exception(msg="Error in MySQL connection")
-
