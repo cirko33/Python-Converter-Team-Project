@@ -25,7 +25,7 @@ def execute_rest(query):
         cursor = connection.cursor()
         try:
             cursor.execute(query)
-        except Error:
+        except Exception:
             cursor.close()
             connection.close()
             raise Exception("Not valid query for modify data")
