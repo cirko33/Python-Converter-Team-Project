@@ -1,7 +1,7 @@
 import unittest
 
-from Repository import read_items
-from Repository import execute_rest
+from Repository.Repository import read_items
+from Repository.Repository import execute_rest
 
 class TestRepository(unittest.TestCase):
     def test_succsess(self):

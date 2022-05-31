@@ -1,5 +1,5 @@
 import unittest
-from JSONXMLAdapter import ConvertToXML, ConvertToJSON
+from JsonXmlAdapter.JSONXMLAdapter import ConvertToXML, ConvertToJSON
 
 class TestMethods(unittest.TestCase):
     def test_successfull(self):
