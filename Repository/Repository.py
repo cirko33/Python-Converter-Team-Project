@@ -10,14 +10,14 @@ def read_items(query):
         except Exception:
             cursor.close()
             connection.close()
-            raise Exception("Not valid query for reading data")
+            raise Error("Not valid query for reading data")
 
         records = cursor.fetchall()
         cursor.close()
         connection.close()
         return records
     else:
-        raise Exception("Error in MySQL connection")
+        raise Error("Error in MySQL connection")
 
 def execute_rest(query):
     connection = mysql.connector.connect(host="localhost", database="res", user="res_projekat", password="restim20")
@@ -28,13 +28,13 @@ def execute_rest(query):
         except Exception:
             cursor.close()
             connection.close()
-            raise Exception("Not valid query for modify data")
+            raise Error("Not valid query for modify data")
         
         connection.commit()
-        retVal = cursor.rowcount
+        ret_val = cursor.rowcount
 
         cursor.close()
         connection.close()
-        return retVal
+        return ret_val
     else:
-        raise Exception(msg="Error in MySQL connection")
+        raise Error("Error in MySQL connection")
