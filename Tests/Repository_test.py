@@ -1,7 +1,10 @@
 import unittest
 
-from Repository.Repository import read_items
-from Repository.Repository import execute_rest
+import sys
+sys.path.append("..\\Repository")
+
+from Repository import read_items
+from Repository import execute_rest
 
 class TestRepository(unittest.TestCase):
     def test_succsess(self):
