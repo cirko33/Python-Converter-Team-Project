@@ -1,17 +1,24 @@
+from tracemalloc import start
+
+
 def convertToSQL(xmlText):
     sqlString = "";   
 
     def find(string):
         startIndex = xmlText.find("<" + string + ">") + len(string) + 2
         endIndex = xmlText.find("</" + string + ">")
-        sqlPart = xmlText[startIndex:endIndex]
+        if(startIndex == -1 or endIndex == -1):
+            sqlPart = "";
+        else:            
+            sqlPart = xmlText[startIndex:endIndex]        
         return sqlPart
     
     sqlVerb = find("verb")    
     sqlNoun = find("noun")
     sqlFields = find("fields")
-    sqlQuery = find("query")
-    
+    sqlQuery = find("query")    
+
+    #Adjust to SQL query
     #IF SELECT
     if(sqlVerb == "GET"):
         sqlVerb = "select "
