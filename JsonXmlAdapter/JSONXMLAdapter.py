@@ -1,10 +1,10 @@
 import json, xmltodict
 
-def ConvertToJSON(text):
+def convert_to_json(text):
     xmldict = xmltodict.parse(text)
     return json.dumps(xmldict)[13:-1]
     
-def ConvertToXML(z):
+def convert_to_xml(z):
     zahtev = json.loads(z)        
     ret = "<request>\n"
     for key,value in zahtev.items():

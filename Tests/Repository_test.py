@@ -1,10 +1,8 @@
-import unittest
+import unittest, sys
+sys.path.insert(0, "..")
 
-import sys
-sys.path.append("..\\Repository")
-
-from Repository import read_items
-from Repository import execute_rest
+from Repository.Repository import read_items
+from Repository.Repository import execute_rest
 from mysql.connector import Error
 
 class TestRepository(unittest.TestCase):
