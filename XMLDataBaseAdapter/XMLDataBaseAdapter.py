@@ -1,33 +1,17 @@
 def convertToSQL(xmlText):
     sqlString = "";   
 
-    #FINDING VERB
-    startIndex = xmlText.find("<verb>") + len("<verb>")
-    endIndex = xmlText.find("</verb>")
-    sqlVerb = xmlText[startIndex:endIndex]
-
-    #FINDING NOUN
-    startIndex = xmlText.find("<noun>") + len("<noun>")
-    endIndex = xmlText.find("</noun>")
-    sqlNoun = xmlText[startIndex:endIndex]   
-
-    #FINDING QUERY
-    if("<query>" not in xmlText):
-        sqlQuery = ""
-    else:
-        startIndex = xmlText.find("<query>") + len("<query>")
-        endIndex = xmlText.find("</query>")
-        sqlQuery = xmlText[startIndex:endIndex]  
-
-    #FINDING FIELDS     
-    if("<fields>" not in xmlText):
-        sqlFields = ""
-    else:
-        startIndex = xmlText.find("<fields>") + len("<fields>")
-        endIndex = xmlText.find("</fields>")
-        sqlFields = xmlText[startIndex:endIndex]  
-
-    #Adjust to SQL query
+    def find(string):
+        startIndex = xmlText.find("<" + string + ">") + len(string) + 2
+        endIndex = xmlText.find("</" + string + ">")
+        sqlPart = xmlText[startIndex:endIndex]
+        return sqlPart
+    
+    sqlVerb = find("verb")    
+    sqlNoun = find("noun")
+    sqlFields = find("fields")
+    sqlQuery = find("query")
+    
     #IF SELECT
     if(sqlVerb == "GET"):
         sqlVerb = "select "
