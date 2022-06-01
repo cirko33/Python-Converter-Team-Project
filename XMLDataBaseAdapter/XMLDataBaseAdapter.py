@@ -1,6 +1,3 @@
-from tracemalloc import start
-
-
 def convertToSQL(xmlText):
     sqlString = "";   
 
