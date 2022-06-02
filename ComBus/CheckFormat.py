@@ -1,8 +1,7 @@
-from ast import If
-from curses.ascii import isalnum, isalpha
-from dataclasses import field
-from posixpath import split
-from xml.dom import ValidationErr
+import sys
+sys.path.insert(0, "..")
+from HelperFunction.TakingSubstrings import take_substring_from_request
+from curses.ascii import isalnum
 
 
 def check_xml_format(xml_request):
@@ -11,9 +10,7 @@ def check_xml_format(xml_request):
         raise ValueError("BAD_FORMAT 5000")
 
     #Taking value of verb
-    begin = xml_request.find("<verb>") + len("<verb>")
-    end = xml_request.find("</verb>")
-    xml_verb = xml_request[begin : end]
+    xml_verb = take_substring_from_request(xml_request, "<verb>", "</verb>")
 
     #Cheking value of verb
     if xml_verb not in ["GET", "POST", "DELETE", "PATCH"]:
@@ -22,9 +19,7 @@ def check_xml_format(xml_request):
     #Optional field
     if "query" in xml_request:
         #Taking value of query
-        begin = xml_request.find("<query>") + len("<query>")
-        end = xml_request.find("</query>")
-        xml_query = xml_request[begin : end]
+        xml_query = take_substring_from_request(xml_request, "<query>", "</query>")
 
         #If there is any wrong character
         for char in xml_query:
@@ -44,9 +39,7 @@ def check_xml_format(xml_request):
             raise ValueError("BAD_FORMAT 5000")
         
         #Taking fields
-        begin = xml_request.find("<fields>") + len("<fields>")
-        end = xml_request.find("</fields>")
-        xml_field = xml_request[begin : end]
+        xml_field = take_substring_from_request(xml_request, "<fields>", "</fields>")
 
         #If there is any wrong character
         for char in xml_field:
