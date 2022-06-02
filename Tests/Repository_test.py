@@ -1,3 +1,4 @@
+from select import select
 import unittest, sys
 sys.path.insert(0, "..")
 
@@ -13,5 +14,5 @@ class TestRepository(unittest.TestCase):
         self.assertAlmostEqual(execute_rest("delete from korisnik where id=6;"), ("korisnik", "delete", 1))
 
     def test_query_value(self):
-        self.assertRaises(Error, read_items, True)
-        self.assertRaises(Error, execute_rest, True)
+        self.assertAlmostEqual(read_items("select * from pera;"), ("REJECTED", 3000, "Not valid query for reading data"))
+        self.assertAlmostEqual(execute_rest("delete from korisnik where zfssdsda=6;"), ("REJECTED", 3000, "Not valid query for modify data"))
