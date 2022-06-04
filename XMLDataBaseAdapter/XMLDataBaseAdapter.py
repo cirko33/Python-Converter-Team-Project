@@ -38,11 +38,11 @@ def convert_to_sql(xml_text):
         sqlValue = ""       
         sql_verb = "insert into "
         sql_noun = sql_noun[1:-2] + "("
-        sql_fields = sql_fields.split(";")
-        for temp in sql_fields:          
+        sql_queries = sql_query.split(";")
+        for temp in sql_queries:          
             sqlField = sqlField + temp.split('=')[0] + "," 
         sqlField = sqlField[0:-1] + (") values(")
-        for temp in sql_fields:
+        for temp in sql_queries:
             sqlValue = sqlValue + temp.split('=')[1] + "," 
         sqlValue = sqlValue[0:-1] + (")")
         sql_string = sql_verb + sql_noun + sqlField + sqlValue + ";"
@@ -53,7 +53,7 @@ def convert_to_sql(xml_text):
         sql_verb = "update "
         sql_noun = sql_noun[1:-2] + " set "  
         sql_fields = sql_fields.replace(";",",")
-        sql_query = " where " + sql_query  
+        sql_query = "where " + sql_query  
         sql_query = sql_query.replace(";"," and")
         sql_string = sql_verb + sql_noun + sql_fields + sql_query + ";"
         return sql_string 
