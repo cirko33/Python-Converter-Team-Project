@@ -43,8 +43,8 @@ def convert_to_sql(xml_text):
             sqlField = sqlField + temp.split('=')[0] + "," 
         sqlField = sqlField[0:-1] + (") values(")
         for temp in sql_queries:
-            sqlValue = sqlValue + temp.split('=')[1] + "," 
-        sqlValue = sqlValue[0:-1] + (")")
+            sqlValue = sqlValue + temp.split('=')[1] + ", " 
+        sqlValue = sqlValue[0:-2] + (")")
         sql_string = sql_verb + sql_noun + sqlField + sqlValue + ";"
         return sql_string 
 
