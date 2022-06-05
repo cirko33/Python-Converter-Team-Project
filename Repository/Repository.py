@@ -1,62 +1,19 @@
-from dataclasses import fields
-from operator import index
-import mysql.connector, sys
+from pkg_resources import resource_isdir
+from RepositoryCommands import send_request
+import sys
 sys.path.insert(0, "..")
-from mysql.connector import Error
-from HelperFunction.TakingSubstrings import take_substring_from_request
+from Connection.Server import Server
+from Connection.SendData import send_data
 
-def read_items(query):
-    connection = mysql.connector.connect(host="localhost", database="res", user="res_projekat", password="restim20")
-    if connection.is_connected():
-        cursor = connection.cursor()
-        try:
-            cursor.execute(query)
-        except Exception:
-            cursor.close()
-            connection.close()
-            return ("REJECTED", 3000, "Not valid query for reading data")
+if __name__ == '__main__':
+    s = Server(8003)
+    while True:
+        req = s.receive()
+        print("Received data from XMLDB Adapter: " + req)
 
-        records = cursor.fetchall()
+        print("Forward commands")
+        status, status_code, response = send_request(req)
 
-        query_noun = take_substring_from_request(query, "from ", " where")
-        query_fields = take_substring_from_request(query, "select ", " from")
-        query_values = tuple(records)
-
-        ret_val = (query_noun, query_fields, query_values)
-        cursor.close()
-        connection.close()
-        return ret_val
-    else:
-        return ("REJECTED", 3000, "Error at MySQL connection")
-
-def execute_rest(query):
-    connection = mysql.connector.connect(host="localhost", database="res", user="res_projekat", password="restim20")
-    if connection.is_connected():
-        cursor = connection.cursor()
-        try:
-            cursor.execute(query)
-        except Exception:
-            cursor.close()
-            connection.close()
-            return ("REJECTED", 3000, "Not valid query for modify data")
+        print("Database answer: " + response)
+        send_data(s, (status, status_code, response))
         
-        connection.commit()
-
-        splited_query = query.split(" ")
-        query_verb = splited_query[0]
-
-        if query_verb == "update":
-            query_noun = splited_query[1]
-        elif query_verb == "insert":
-            noun = splited_query[2].split("(")
-            query_noun = noun[0]
-        else:
-            query_noun = splited_query[2]
-
-        ret_val = (query_noun, query_verb, cursor.rowcount)
-
-        cursor.close()
-        connection.close()
-        return ret_val
-    else:
-        return ("REJECTED", 3000, "Error at MySQL connection")

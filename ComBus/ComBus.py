@@ -1,4 +1,4 @@
-from CheckFormat import *
+#from CheckFormat import *
 import sys
 sys.path.insert(0, "..")
 from Connection.Server import Server
@@ -18,11 +18,11 @@ if __name__ == '__main__':
         xml_req = json_xml_soc.receive()
         print("Request in XML form: " + xml_req)
 
-        check = check_xml_format(xml_req)
-        if check != "SUCCESS 2000":
-            print("Not valid request")
-            web_client_soc.send(check)
-            continue
+        #check = check_xml_format(xml_req)
+        #if check != "SUCCESS 2000":
+        #    print("Not valid request")
+        #    web_client_soc.send(check)
+        #    continue
         
         print("Forward request to XML DB Adapter")
         xml_db_soc.send(xml_req)

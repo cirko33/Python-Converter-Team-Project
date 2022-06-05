@@ -1,9 +1,7 @@
-from select import select
 import unittest, sys
 sys.path.insert(0, "..")
 
-from Repository.Repository import read_items
-from Repository.Repository import execute_rest
+from Repository.RepositoryCommands import *
 from mysql.connector import Error
 
 class TestRepository(unittest.TestCase):

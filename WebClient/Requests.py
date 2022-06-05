@@ -22,7 +22,3 @@ requests.append('{ "verb" : "GET", "noun" : ' + random.choice(nouns) + ', "query
 requests.append('{ "verb" : "DELETE", "noun" : ' + random.choice(nouns) + ', "query" : ' + random.choice(querys) + ' "fields" : "id; name; lastname;" }')
 requests.append('{ "verb" : "DELETE", "noun" : ' + random.choice(nouns) + ', "query" : ' + random.choice(querys) + ' "fields" : "id; username;" }')
 requests.append('{ "verb" : "GET", "noun" : ' + random.choice(nouns) + ', "fields" : "name; username;" }')
-
-for i in range(50):
-    print(random.choice(requests))
-    time.sleep(1)
