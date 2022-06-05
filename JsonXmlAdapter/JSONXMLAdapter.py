@@ -2,7 +2,8 @@ import json, xmltodict
 
 def convert_to_json(text):
     xmldict = xmltodict.parse(text)
-    return json.dumps(xmldict)[13:-1]
+    ret = json.dumps(xmldict)
+    return ret[ret.find(':') + 2 : -1]
     
 def convert_to_xml(z):
     zahtev = json.loads(z)        

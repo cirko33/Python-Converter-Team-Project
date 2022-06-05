@@ -9,4 +9,4 @@ class Client:
         self.con.send(message.encode())
 
     def receive(self):
-        return self.con.recv(1024).decode()
+        return self.con.recv(2048).decode()
