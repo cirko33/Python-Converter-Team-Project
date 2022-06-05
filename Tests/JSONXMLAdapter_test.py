@@ -1,6 +1,6 @@
 import unittest, sys
 sys.path.insert(0, "..")
-from JsonXmlAdapter.JSONXMLAdapter import convert_to_xml, convert_to_json
+from JsonXmlAdapter.JSONXMLConverter import convert_to_xml, convert_to_json
 
 class TestMethods(unittest.TestCase):
     def test_successfull(self):
