@@ -43,7 +43,7 @@ def check_xml_format(xml_request):
 
         #If there is any wrong character
         for char in xml_field:
-            if char is not isalnum() and char not in [";", " "]:
+            if not isalnum(char) and char not in [";", " "]:
                 raise ValueError("BAD_FORMAT 5000")
 
     return "SUCCESS 2000"
