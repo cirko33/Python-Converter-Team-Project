@@ -34,18 +34,18 @@ def convert_to_sql(xml_text):
 
     #IF INSERT
     elif(sql_verb == "POST"):
-        sqlField = "" 
-        sqlValue = ""       
+        sql_field = "" 
+        sql_value = ""       
         sql_verb = "insert into "
         sql_noun = sql_noun[1:-2] + "("
         sql_queries = sql_query.split(";")
         for temp in sql_queries:          
-            sqlField = sqlField + temp.split('=')[0] + "," 
-        sqlField = sqlField[0:-1] + (") values(")
+            sql_field = sql_field + temp.split('=')[0] + "," 
+        sql_field = sql_field[0:-1] + (") values(")
         for temp in sql_queries:
-            sqlValue = sqlValue + temp.split('=')[1] + ", " 
-        sqlValue = sqlValue[0:-2] + (")")
-        sql_string = sql_verb + sql_noun + sqlField + sqlValue + ";"
+            sql_value = sql_value + temp.split('=')[1] + ", " 
+        sql_value = sql_value[0:-2] + (")")
+        sql_string = sql_verb + sql_noun + sql_field + sql_value + ";"
         return sql_string 
 
     #IF UPDATE
@@ -66,6 +66,8 @@ def convert_to_sql(xml_text):
         sql_query = sql_query.replace(";"," and")
         sql_string = sql_verb + sql_noun + sql_query + ";"
         return sql_string
+    
+    return ""
 
 def convert_to_xml(text):
     noun,fields,value = text

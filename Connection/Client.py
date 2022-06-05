@@ -10,3 +10,6 @@ class Client:
 
     def receive(self):
         return self.con.recv(2048).decode()
+
+    def close(self):
+        self.con.close()

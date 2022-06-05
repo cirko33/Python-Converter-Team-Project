@@ -9,6 +9,8 @@ if __name__ == "__main__":
     
     while True:
         pack = c.receive()
+        if pack.__len__() == 0:
+            break
         print("Received from server:" + pack)
         if pack.startswith('<'):
             print("Converting to JSON")
@@ -19,3 +21,5 @@ if __name__ == "__main__":
 
         print("Sending: " + ret)
         c.send(ret)
+    
+    c.close()

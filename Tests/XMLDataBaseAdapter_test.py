@@ -1,6 +1,6 @@
 import unittest, sys
 sys.path.insert(0, "..")
-from XMLDataBaseAdapter.XMLDataBaseAdapter import convert_to_sql, convert_to_xml
+from XMLDataBaseAdapter.XMLDataBaseConverter import convert_to_sql, convert_to_xml
 
 class TestMethods(unittest.TestCase):
     def test_successfull(self):
