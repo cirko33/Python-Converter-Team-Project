@@ -1,8 +1,10 @@
-import sys
-sys.path.insert(0, "..")
-from HelperFunction.TakingSubstrings import take_substring_from_request
-from curses.ascii import isalnum
+def take_substring_from_request(request, begin_string, end_string):
+    begin = request.find(begin_string) + len(begin_string)
+    end = request.find(end_string)
 
+    substring = request[begin : end]
+
+    return substring
 
 def check_xml_format(xml_request):
     #Required fields
@@ -23,7 +25,7 @@ def check_xml_format(xml_request):
 
         #If there is any wrong character
         for char in xml_query:
-            if not isalnum(char) and char not in [";", "=", "'", " "]:
+            if not char.isalnum() and char not in [";", "=", "'", " "]:
                 raise ValueError("BAD_FORMAT 5000")
 
         #Does every query have '=' 
@@ -35,7 +37,7 @@ def check_xml_format(xml_request):
     #Optional field
     if "fields" in xml_request:
         #Only apears when verb is GET
-        if xml_verb is not "GET":
+        if xml_verb != "GET":
             raise ValueError("BAD_FORMAT 5000")
         
         #Taking fields
@@ -43,7 +45,7 @@ def check_xml_format(xml_request):
 
         #If there is any wrong character
         for char in xml_field:
-            if not isalnum(char) and char not in [";", " "]:
+            if not char.isalnum() and char not in [";", " "]:
                 raise ValueError("BAD_FORMAT 5000")
 
     return "SUCCESS 2000"
