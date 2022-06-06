@@ -18,6 +18,12 @@ def read_items(query):
 
         records = cursor.fetchall()
 
+        def take_substring_from_request(request, begin_string, end_string):
+            begin = request.find(begin_string) + len(begin_string)
+            end = request.find(end_string)
+            substring = request[begin : end]
+            return substring
+
         query_noun = take_substring_from_request(query, "from ", " where")
         query_fields = take_substring_from_request(query, "select ", " from")
         query_values = tuple(records)
