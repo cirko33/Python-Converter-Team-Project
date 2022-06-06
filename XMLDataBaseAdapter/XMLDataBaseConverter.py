@@ -82,28 +82,33 @@ def convert_to_xml(text):
     xml_answer += "\t<status>SUCCESS</status>\n"
     xml_answer += "\t<status_code>2000</status_code>\n"        
 
-    if(fields not in ("insert","update","delete")):        
-        xml_answer += "\t<payload>\n"
-        counter = 0
-        for tuple in value:
-            xml_answer += "\t\t<" + noun + str(counter) + ">\n"
+    if(fields not in ("insert","update","delete")):       
+        def get_xml(tuple):            
+            xml_a = ""
             if(fields == "*"):
-                xml_answer += "\t\t\t<id>" + str(tuple[0]) + "</id>\n" 
-                xml_answer += "\t\t\t<name>" + tuple[1] + "</name>\n" 
-                xml_answer += "\t\t\t<lastname>" + tuple[2] + "</lastname>\n" 
-                xml_answer += "\t\t\t<username>" + tuple[3] + "</username>\n" 
-                xml_answer += "\t\t\t<email>" + tuple[4] + "</email>\n" 
+                xml_a += "\t\t\t<id>" + str(tuple[0]) + "</id>\n" 
+                xml_a += "\t\t\t<name>" + tuple[1] + "</name>\n" 
+                xml_a += "\t\t\t<lastname>" + tuple[2] + "</lastname>\n" 
+                xml_a += "\t\t\t<username>" + tuple[3] + "</username>\n" 
+                xml_a += "\t\t\t<email>" + tuple[4] + "</email>\n" 
                 if(noun == "profesor"):
-                    xml_answer+= "\t\t\t<departman>" + tuple[5] + "</departman>\n" 
+                    xml_a+= "\t\t\t<departman>" + tuple[5] + "</departman>\n" 
                 elif(noun == "student"):
-                    xml_answer+= "\t\t\t<year_of_study>" + tuple[5] + "</year_of_study>\n" 
+                    xml_a+= "\t\t\t<year_of_study>" + tuple[5] + "</year_of_study>\n" 
             else:
                 field_splitted = fields.split(", ")
                 for index in range(len(tuple)):
-                    xml_answer += "\t\t\t<" + field_splitted[index] + ">" + str(tuple[index]) + "</" + field_splitted[index] + ">\n"
-                
+                    xml_a += "\t\t\t<" + field_splitted[index] + ">" + str(tuple[index]) + "</" + field_splitted[index] + ">\n"
+            return xml_a
+       
+        xml_answer += "\t<payload>\n"
+        counter = 0                  
+        for tuple in value:                
+            xml_answer += "\t\t<" + noun + str(counter) + ">\n"
+            xml_answer += get_xml(tuple)
             xml_answer += "\t\t</" + noun + str(counter) + ">\n"
             counter += 1
+        
         xml_answer += "\t</payload>\n"
     else:
         xml_answer += "\t<payload>" + str(value) + "</payload>\n"
