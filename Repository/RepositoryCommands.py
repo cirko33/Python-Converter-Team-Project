@@ -1,9 +1,5 @@
-from dataclasses import fields
-from operator import index
-import mysql.connector, sys
-sys.path.insert(0, "..")
+import mysql.connector
 from mysql.connector import Error
-from HelperFunction.TakingSubstrings import take_substring_from_request
 
 def read_items(query):
     connection = mysql.connector.connect(host="localhost", database="res", user="res_projekat", password="restim20")
@@ -26,7 +22,7 @@ def read_items(query):
 
         query_noun = take_substring_from_request(query, "from ", " where")
         query_fields = take_substring_from_request(query, "select ", " from")
-        query_values = tuple(records)
+        query_values = list(records)
 
         ret_val = (query_noun, query_fields, query_values)
         cursor.close()
