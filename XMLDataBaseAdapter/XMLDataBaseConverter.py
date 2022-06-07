@@ -5,11 +5,11 @@ def convert_to_sql(xml_text):
         start_index = xml_text.find("<" + string + ">") + len(string) + 2
         end_index = xml_text.find("</" + string + ">")
         if(start_index == -1 or end_index == -1):
-            sql_part = "";
+            sql_part = ""
         else:            
             sql_part = xml_text[start_index:end_index]        
         return sql_part
-    
+
     sql_verb = find("verb")    
     sql_noun = find("noun")
     sql_fields = find("fields")

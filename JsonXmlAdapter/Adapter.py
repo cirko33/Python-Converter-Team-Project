@@ -10,6 +10,7 @@ if __name__ == "__main__":
     while True:
         pack = c.receive()
         if len(pack) == 0:
+            c.close()
             break
         
         if pack.startswith('<'):
@@ -20,4 +21,4 @@ if __name__ == "__main__":
             ret = convert_to_xml(pack)
 
         c.send(ret)
-    c.close()
+    

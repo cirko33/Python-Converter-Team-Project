@@ -1,24 +1,38 @@
 import random
-import time
 
-requests = []
-querys = ['"name = \'Luka\'"', '"username = \'jelovopopov\'"', '"department = \'EEPSI\'"', '"name = \'Dejan\' and year_of_study = \'3\'"', '"department = \'ACS\' and name = \'Petar\'"', '"username = \'dekikuki\'"']
-fields = ['"*"', '"id; name; email"', '"id; name; lastname;"', '"id; username;"', '"name; lastname; department"', '"name; lastname; year_of_study;"']
+verbs = ['"GET"', '"POST"', '"PATCH"', '"DELETE"']
 nouns = ['"/korisnik/1"', '"/student/1"', '"/profesor/1"']
+queries = ['"name = \'Luka\'"', '"username = \'jelovopopov\'"', '"username = \'dekikuki\'"', '"name = \'Petar\'"', '"year_of_study = 3; name = \'Dejan\'"', '"department = \'EEPSI\'"']
+fields = ['"*"', '"id; name; email"', '"id; name; lastname"', '"id; username"', '"name; lastname; department"', '"name; lastname; year_of_study"']
 
-for i in range(10):
-    requests.append('{ "verb" : "GET", "noun" : ' + random.choice(nouns) + ', "query" : ' + random.choice(querys) + ', "fields" : '  + random.choice(fields) + ' }')
-for i in range(10):
-    requests.append('{ "verb" : "DELETE", "noun" : ' + random.choice(nouns) + ', "query" : ' + random.choice(querys) + ' }')
-for i in range(10):
-    requests.append('{ "verb" : "PATCH", "noun" : ' + random.choice(nouns) + ', "query" : ' + random.choice(querys) + ', "fields" : '  + random.choice(fields) + ' }')
+def request():
+    verb = random.choice(verbs)
+    noun = random.choice(nouns)
+    if verb != '"POST"':
+        if "korisnik" in noun:
+            query = random.choice(queries[:4])    
+        else:
+            query = random.choice(queries)
+    else:
+        if noun == '"/korisnik/1"':
+            query = '"id = \'12\'; name = \'Marko\'; lastname = \'Markovic\'; username = \'marecare\'; email = \'markomarko@gmail.com\'"'
+        elif noun == '"/student/1"':
+            query = '"id = 10; name = \'Maja\'; lastname = \'Vucurevic\'; username = \'vuca01\'; year_of_study = 2"'
+        else:
+            query = '"id = 13; name = \'Dragan\'; lastname = \'Ivetic\'; username = \'ivetic\'; email = \'ivetic@uns.ac.rs\'; department = \'ESI\'"'
 
-requests.append('{ "verb" : "POST", "noun" : "/student/1", "query" : "id = \'10\'; name = \'Maja\'; lastname = \'Vucurevic\'; username = \'vuca01\'; year_of_study = \'2\'" }')
-requests.append('{ "verb" : "POST", "noun" : "/korisnik/1", "query" : "id = \'12\'; name = \'Marko\'; lastname = \'Markovic\'; username = \'marecare\'; email = \'markomarko@gmail.com\'" }')
-requests.append('{ "verb" : "POST", "noun" : "/profesor/1", "query" : "id = \'13\'; name = \'Dragan\'; lastname = \'Ivetic\'; username = \'ivetic\'; email = \'ivetic@uns.ac.rs\'; department = \'ESI\'" }')
-requests.append('{ "verb" : "POST", "noun" : "/korisnik/1", "query" : "id = \'3\'; name = \'Lazar\'; lastname = \'Lazarevic\'; username = \'ludilaza\'; email = \'lazalaza@gmail.com\'" }')
-requests.append('{ "verb" : "POST", "noun" : "/profesor/1", "query" : "id = \'2\'; name = \'Mirko\'; lastname = \'Mirkovic\'; username = \'mirskosvirko\'; email = \'mirkovic@uns.ac.rs\'; department = \'ACS\'" }')
-requests.append('{ "verb" : "GET", "noun" : ' + random.choice(nouns) + ', "query" : ' + random.choice(querys) + ' }')
-requests.append('{ "verb" : "DELETE", "noun" : ' + random.choice(nouns) + ', "query" : ' + random.choice(querys) + ' "fields" : "id; name; lastname;" }')
-requests.append('{ "verb" : "DELETE", "noun" : ' + random.choice(nouns) + ', "query" : ' + random.choice(querys) + ' "fields" : "id; username;" }')
-requests.append('{ "verb" : "GET", "noun" : ' + random.choice(nouns) + ', "fields" : "name; username;" }')
+    if verb == '"GET"':
+        if "korisnik" in noun:
+            field = random.choice(fields[:4])
+        else:
+            field = random.choice(fields)
+    else:
+        field = ""
+    
+    verb = f'"verb" : {verb}'
+    noun = f', "noun" : {noun}'
+    query = f', "query" : {query}'
+    if field != "":
+        field = f', "fields" : {field}'
+
+    return "{ " + verb + noun + query + field + " }"

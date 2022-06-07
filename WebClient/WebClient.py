@@ -1,4 +1,4 @@
-import sys, random, time
+import sys, time
 from Requests import *
 sys.path.insert(0, "..")
 from Connection.Client import Client
@@ -7,8 +7,8 @@ if __name__ == '__main__':
     c = Client(8000)
 
     while True:
-        time.sleep(4)
-        c.send(requests[random.randint(0, len(requests) - 1)])
+        time.sleep(3)
+        c.send(request())
 
         ret = c.receive()
         if len(ret) == 0:
