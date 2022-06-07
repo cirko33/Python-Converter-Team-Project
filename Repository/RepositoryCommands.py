@@ -1,6 +1,7 @@
 import mysql.connector
 from mysql.connector import Error
 
+
 def read_items(query, usr, passw):
     try:
         connection = mysql.connector.connect(host="localhost", database="res", user=str(usr), password=str(passw))
@@ -16,13 +17,14 @@ def read_items(query, usr, passw):
 
         return ("REJECTED", 3000, message)
 
+    records = cursor.fetchall()
+
     def take_substring_from_request(request, begin_string, end_string):
         begin = request.find(begin_string) + len(begin_string)
         end = request.find(end_string)
         substring = request[begin : end]
         return substring
-        
-    records = cursor.fetchall()
+
     query_noun = take_substring_from_request(query, "from ", " where")
     query_fields = take_substring_from_request(query, "select ", " from")
     query_values = list(records)
