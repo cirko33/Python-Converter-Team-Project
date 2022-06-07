@@ -11,11 +11,11 @@ def read_items(query, usr, passw):
 
     try:
         cursor.execute(query)
-    except Exception:
+    except Exception as e:
         cursor.close()
         connection.close()
 
-        return ("REJECTED", 3000, "Not valid query for reading data")
+        return ("REJECTED", 3000, f'Not valid query for reading data: {e}')
 
     records = cursor.fetchall()
 
@@ -42,11 +42,11 @@ def execute_rest(query, usr, passw):
 
     try:
         cursor.execute(query)
-    except Exception:
+    except Exception as e:
         cursor.close()
         connection.close()
 
-        return ("REJECTED", 3000, "Not valid query for reading data")
+        return ("REJECTED", 3000, f'Not valid query for reading data: {e}')
     
     connection.commit()
     splited_query = query.split(" ")
@@ -65,7 +65,7 @@ def execute_rest(query, usr, passw):
 
 
 def send_request(query):
-    file = open("RepositoryAuthentification.txt")
+    file = open("RepositoryAuthentication.txt")
     username = file.readline()
     password = file.readline()
     file.close();
