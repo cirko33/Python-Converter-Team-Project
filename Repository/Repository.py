@@ -8,11 +8,9 @@ if __name__ == '__main__':
     s = Server(8003)
     while True:
         req = s.receive()
-        print("Received data from XMLDB Adapter: " + req)
-
-        print("Forward commands")
+        if len(req) == 0:
+            s.close()
+            break
         status, status_code, response = send_request(req)
-
-        print("Database answer: " + response)
         send_data(s, (status, status_code, response))
         

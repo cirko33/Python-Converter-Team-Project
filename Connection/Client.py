@@ -6,10 +6,14 @@ class Client:
         self.con.connect((socket.gethostname(), port))
 
     def send(self, message):
+        print("Sending: \n" + message)
         self.con.send(message.encode())
 
     def receive(self):
-        return self.con.recv(2048).decode()
+        ret = self.con.recv(2048).decode()
+        print("Received: \n" + ret)
+        return ret
 
     def close(self):
+        print("Closing...")
         self.con.close()

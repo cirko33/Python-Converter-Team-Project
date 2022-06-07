@@ -5,11 +5,11 @@ def convert_to_sql(xml_text):
         start_index = xml_text.find("<" + string + ">") + len(string) + 2
         end_index = xml_text.find("</" + string + ">")
         if(start_index == -1 or end_index == -1):
-            sql_part = "";
+            sql_part = ""
         else:            
             sql_part = xml_text[start_index:end_index]        
         return sql_part
-    
+
     sql_verb = find("verb")    
     sql_noun = find("noun")
     sql_fields = find("fields")
@@ -94,7 +94,7 @@ def convert_to_xml(text):
                 if(noun == "profesor"):
                     xml_a+= "\t\t\t<departman>" + tuple[5] + "</departman>\n" 
                 elif(noun == "student"):
-                    xml_a+= "\t\t\t<year_of_study>" + tuple[5] + "</year_of_study>\n" 
+                    xml_a+= "\t\t\t<year_of_study>" + str(tuple[5]) + "</year_of_study>\n" 
             else:
                 field_splitted = fields.split(", ")
                 for index in range(len(tuple)):
