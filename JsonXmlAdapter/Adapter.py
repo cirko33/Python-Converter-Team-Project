@@ -9,9 +9,9 @@ if __name__ == "__main__":
     
     while True:
         pack = c.receive()
-        if pack.__len__() == 0:
+        if len(pack) == 0:
             break
-        print("Received from server:" + pack)
+        
         if pack.startswith('<'):
             print("Converting to JSON")
             ret = convert_to_json(pack)
@@ -19,7 +19,5 @@ if __name__ == "__main__":
             print("Converting to XML")
             ret = convert_to_xml(pack)
 
-        print("Sending: " + ret)
         c.send(ret)
-    
     c.close()

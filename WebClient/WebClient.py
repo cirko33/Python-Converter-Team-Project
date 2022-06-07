@@ -7,10 +7,14 @@ if __name__ == '__main__':
     c = Client(8000)
 
     while True:
-        time.sleep(2)
-        c.send(requests[random.randint(0, requests.__len__() - 1)])
+        time.sleep(4)
+        c.send(requests[random.randint(0, len(requests) - 1)])
 
-        print("Server: " + c.receive())
+        ret = c.receive()
+        if len(ret) == 0:
+            c.close()
+            break
+
         if input("Enter x for exit:") == "x":
             c.close()
             break

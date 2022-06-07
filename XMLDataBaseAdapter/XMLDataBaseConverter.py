@@ -94,7 +94,7 @@ def convert_to_xml(text):
                 if(noun == "profesor"):
                     xml_a+= "\t\t\t<departman>" + tuple[5] + "</departman>\n" 
                 elif(noun == "student"):
-                    xml_a+= "\t\t\t<year_of_study>" + tuple[5] + "</year_of_study>\n" 
+                    xml_a+= "\t\t\t<year_of_study>" + str(tuple[5]) + "</year_of_study>\n" 
             else:
                 field_splitted = fields.split(", ")
                 for index in range(len(tuple)):

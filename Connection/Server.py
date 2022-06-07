@@ -6,13 +6,18 @@ class Server:
         self.s.bind((socket.gethostname(), port))
         self.s.listen(1)
         self.con, self.add = self.s.accept()
+        print("Connected with: " + str(self.add))
 
 
     def send(self, message):
+        print("Sending: \n" + message)
         self.con.send(message.encode())
 
     def receive(self):
-        return self.con.recv(2048).decode()
+        ret = self.con.recv(2048).decode()
+        print("Received: \n" + ret)
+        return ret
 
     def close(self):
+        print("Closing...")
         self.con.close()
