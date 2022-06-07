@@ -1,6 +1,12 @@
 import mysql.connector
 from mysql.connector import Error
 
+def take_substring_from_request(request, begin_string, end_string):
+        begin = request.find(begin_string) + len(begin_string)
+        end = request.find(end_string)
+        substring = request[begin : end]
+        return substring
+
 def read_items(query, usr, passw):
     try:
         connection = mysql.connector.connect(host="localhost", database="res", user=str(usr), password=str(passw))
@@ -9,17 +15,14 @@ def read_items(query, usr, passw):
     except Exception:
         if connection.is_connected():
             message = "Not valid query for reading data"
+            cursor.close()
+            connection.close()
         else:
             message = "Error at MySQL connection"
-        cursor.close()
-        connection.close()
+
         return ("REJECTED", 3000, message)
+
     records = cursor.fetchall()
-    def take_substring_from_request(request, begin_string, end_string):
-        begin = request.find(begin_string) + len(begin_string)
-        end = request.find(end_string)
-        substring = request[begin : end]
-        return substring
     query_noun = take_substring_from_request(query, "from ", " where")
     query_fields = take_substring_from_request(query, "select ", " from")
     query_values = list(records)
@@ -36,10 +39,11 @@ def execute_rest(query, usr, passw):
     except Exception:
         if connection.is_connected():
             message = "Not valid query for reading data"
+            cursor.close()
+            connection.close()
         else:
             message = "Error at MySQL connection"
-        cursor.close()
-        connection.close()
+
         return ("REJECTED", 3000, message)
     
     connection.commit()
