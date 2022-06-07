@@ -1,4 +1,3 @@
-from pkg_resources import resource_isdir
 from RepositoryCommands import send_request
 import sys
 sys.path.insert(0, "..")

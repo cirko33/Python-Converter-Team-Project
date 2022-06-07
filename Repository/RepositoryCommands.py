@@ -6,16 +6,16 @@ def read_items(query, usr, passw):
     try:
         connection = mysql.connector.connect(host="localhost", database="res", user=str(usr), password=str(passw))
         cursor = connection.cursor()
+    except Error:
+        return ("REJECTED", 3000, "Error at MySQL connection")
+
+    try:
         cursor.execute(query)
     except Exception:
-        if connection.is_connected():
-            message = "Not valid query for reading data"
-            cursor.close()
-            connection.close()
-        else:
-            message = "Error at MySQL connection"
+        cursor.close()
+        connection.close()
 
-        return ("REJECTED", 3000, message)
+        return ("REJECTED", 3000, "Not valid query for reading data")
 
     records = cursor.fetchall()
 
@@ -37,16 +37,16 @@ def execute_rest(query, usr, passw):
     try:
         connection = mysql.connector.connect(host="localhost", database="res", user=str(usr), password=str(passw))
         cursor = connection.cursor()
+    except Error:
+        return ("REJECTED", 3000, "Error at MySQL connection")
+
+    try:
         cursor.execute(query)
     except Exception:
-        if connection.is_connected():
-            message = "Not valid query for reading data"
-            cursor.close()
-            connection.close()
-        else:
-            message = "Error at MySQL connection"
+        cursor.close()
+        connection.close()
 
-        return ("REJECTED", 3000, message)
+        return ("REJECTED", 3000, "Not valid query for reading data")
     
     connection.commit()
     splited_query = query.split(" ")
