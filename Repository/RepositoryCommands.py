@@ -23,8 +23,8 @@ def read_items(query):
     try:
         connection = mysql.connector.connect(**config)
         cursor = connection.cursor()
-    except Error:
-        return ("REJECTED", 3000, "Error at MySQL connection")
+    except Error as err:
+        return ("REJECTED", 3000, f"Error at MySQL connection: {err}")
 
     try:
         cursor.execute(query)
@@ -54,8 +54,8 @@ def execute_rest(query):
     try:
         connection = mysql.connector.connect(**config)
         cursor = connection.cursor()
-    except Error:
-        return ("REJECTED", 3000, "Error at MySQL connection")
+    except Error as err:
+        return ("REJECTED", 3000, f"Error at MySQL connection: {err}")
 
     try:
         cursor.execute(query)
