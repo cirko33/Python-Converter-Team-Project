@@ -63,7 +63,7 @@ def execute_rest(query):
         cursor.close()
         connection.close()
 
-        return ("REJECTED", 3000, f'Not valid query for reading data: {e}')
+        return ("REJECTED", 3000, f'Not valid query for modify data: {e}')
     
     connection.commit()
     splited_query = query.split(" ")
