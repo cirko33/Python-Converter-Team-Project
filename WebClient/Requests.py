@@ -26,6 +26,11 @@ def request():
             field = random.choice(fields[:4])
         else:
             field = random.choice(fields)
+    elif verb == '"PATCH"':
+        if "korisnik" in noun:
+            field = random.choice(query[:4])
+        else:
+            field = random.choice(query)
     else:
         field = ""
     

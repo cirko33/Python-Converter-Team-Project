@@ -19,9 +19,10 @@ if __name__ == '__main__':
         print("Request in XML form: " + xml_req)
 
         check = check_xml_format(xml_req)
-        if check != "SUCCESS 2000":
+        if check != "":
             print("Not valid request")
-            web_client_soc.send(check)
+            json_xml_soc.send(check)
+            web_client_soc.send(json_xml_soc.receive())
             continue
     
         print("Forward request to XML DB Adapter")

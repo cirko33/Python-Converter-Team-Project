@@ -3,7 +3,7 @@
 def check_xml_format(xml_request):
     #Required fields
     if "verb" not in xml_request or "noun" not in xml_request:
-        return "BAD_FORMAT 5000"
+        return "<response><status>BAD_FORMAT</status><status_code>5000</status_code><payload>Not valid</payload></response>"
 
     def take_substring_from_request(request, begin_string, end_string):
         begin = request.find(begin_string) + len(begin_string)
@@ -18,7 +18,7 @@ def check_xml_format(xml_request):
 
     #Cheking value of verb
     if xml_verb not in ["GET", "POST", "DELETE", "PATCH"]:
-        return "BAD_FORMAT 5000 Wrong value of verb"
+        return "<response><status>BAD_FORMAT</status><status_code>5000</status_code><payload>Verb not valid</payload></response>"
 
     #Optional field
     if "query" in xml_request:
@@ -28,19 +28,19 @@ def check_xml_format(xml_request):
         #If there is any invalid character
         for char in xml_query:
             if not char.isalnum() and char not in [";", "=", "'", " "]:
-                return "BAD_FORMAT 5000 Invalid character in query"
+                return "<response><status>BAD_FORMAT</status><status_code>5000</status_code><payload>Invalid characters in query</payload></response>"
 
         #Does every query have '=' 
         queries = xml_query.split(";")
         for query in queries:
             if "=" not in query:
-                return "BAD_FORMAT 5000 Query missing '='"
+                return "<response><status>BAD_FORMAT</status><status_code>5000</status_code><payload>Missing '=' in query</payload></response>"
 
     #Optional field
     if "fields" in xml_request:
         #Only apears when verb is GET
         if xml_verb == "DELETE":
-            return "BAD_FORMAT 5000 DELETE doesn't have fields"
+            return "<response><status>BAD_FORMAT</status><status_code>5000</status_code><payload>DELETE can't have fields</payload></response>"
 
         #Taking fields
         xml_field = take_substring_from_request(xml_request, "<fields>", "</fields>")
@@ -48,17 +48,17 @@ def check_xml_format(xml_request):
         if xml_verb == "PATCH":
             for char in xml_field:
                 if not char.isalnum() and char not in [";", "=", "'", " "]:
-                    return "BAD_FORMAT 5000 Invalid character in patch_query"
+                    return "<response><status>BAD_FORMAT</status><status_code>5000</status_code><payload>Invalid character in patch query</payload></response>"
 
             #Does every patch_field have '=' 
             fields = xml_query.split(";")
             for field in fields:
                 if "=" not in field:
-                    return "BAD_FORMAT 5000 Patch_query missing '='"
+                    return "<response><status>BAD_FORMAT</status><status_code>5000</status_code><payload>Missing '=' in patch query</payload></response>"
         else:
             #If there is any wrong character
             for char in xml_field:
                 if not char.isalnum() and char not in [";", " "]:
-                    return "BAD_FORMAT 5000 Invalid character in field"
+                    return "<response><status>BAD_FORMAT</status><status_code>5000</status_code><payload>Invalid character in fields</payload></response>"
 
-    return "SUCCESS 2000"
+    return ""
