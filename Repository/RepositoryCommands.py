@@ -1,10 +1,27 @@
 import mysql.connector
 from mysql.connector import Error
 
+# def load():
+#     file = open("RepositoryAuthentication.txt")
+#     username = file.readline()
+#     password = file.readline()
+#     file.close();
+#     return username, password
 
-def read_items(query, usr, passw):
+mysql_host = "localhost"
+mysql_database = "res"
+mysql_user, mysql_password = "resres_projekat", "restim20"
+
+config = {
+    'host' : mysql_host,
+    'database' : mysql_database,
+    'user' : str(mysql_user),
+    'password' : str(mysql_password)
+}
+
+def read_items(query):
     try:
-        connection = mysql.connector.connect(host="localhost", database="res", user=str(usr), password=str(passw))
+        connection = mysql.connector.connect(**config)
         cursor = connection.cursor()
     except Error:
         return ("REJECTED", 3000, "Error at MySQL connection")
@@ -33,9 +50,9 @@ def read_items(query, usr, passw):
     connection.close()
     return ret_val
 
-def execute_rest(query, usr, passw):
+def execute_rest(query):
     try:
-        connection = mysql.connector.connect(host="localhost", database="res", user=str(usr), password=str(passw))
+        connection = mysql.connector.connect(**config)
         cursor = connection.cursor()
     except Error:
         return ("REJECTED", 3000, "Error at MySQL connection")
@@ -65,11 +82,8 @@ def execute_rest(query, usr, passw):
 
 
 def send_request(query):
-    file = open("RepositoryAuthentication.txt")
-    username = file.readline()
-    password = file.readline()
-    file.close();
     if query.startswith('select'):
-        return read_items(query, username, password)
+        return read_items(query)
     else:
-        return execute_rest(query, username, password)
+        return execute_rest(query)
+
