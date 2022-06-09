@@ -53,7 +53,7 @@ def convert_to_sql(xml_text):
         sql_verb = "update "
         sql_noun = sql_noun[1:-2] + " set "  
         sql_fields = sql_fields.replace(";",",")
-        sql_query = "where " + sql_query  
+        sql_query = " where " + sql_query  
         sql_query = sql_query.replace(";"," and")
         sql_string = sql_verb + sql_noun + sql_fields + sql_query + ";"
         return sql_string 

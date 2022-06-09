@@ -1,3 +1,4 @@
+from pyexpat import ExpatError
 import unittest, sys
 sys.path.insert(0, "..")
 from JsonXmlAdapter.JSONXMLConverter import convert_to_xml, convert_to_json
@@ -15,3 +16,7 @@ class TestMethods(unittest.TestCase):
         self.assertEqual(convert_to_json('<response>\n\t<verb>DELETE</verb>\n\t<noun>/profesor/1</noun>\n\t<query>name=\'Petar\'; type=\'1\'</query>\n</response>'), '{"verb": "DELETE", "noun": "/profesor/1", "query": "name=\'Petar\'; type=\'1\'"}')
         self.assertEqual(convert_to_json('<response>\n\t<verb>POST</verb>\n\t<noun>/korisnik/1</noun>\n\t<query>id=\'22\'; name=\'Jovan\'; lastname=\'Jovanovic\'; username=\'jova\'; year_of_study=\'1\'; type=\'1\'</query>\n</response>'),'{"verb": "POST", "noun": "/korisnik/1", "query": "id=\'22\'; name=\'Jovan\'; lastname=\'Jovanovic\'; username=\'jova\'; year_of_study=\'1\'; type=\'1\'"}')
         self.assertEqual(convert_to_json('<response>\n\t<verb>GET</verb>\n\t<noun>/profesor/1</noun>\n\t<query>department=\'EEPSI\'; type=\'1\'</query>\n\t<fields>id; name; lastname; department</fields>\n</response>'),'{"verb": "GET", "noun": "/profesor/1", "query": "department=\'EEPSI\'; type=\'1\'", "fields": "id; name; lastname; department"}')
+
+    def test_bad_input_xml(self):
+        self.assertRaises(ExpatError, convert_to_json, '')
+        
