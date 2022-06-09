@@ -66,8 +66,6 @@ def convert_to_sql(xml_text):
         sql_query = sql_query.replace(";"," and")
         sql_string = sql_verb + sql_noun + sql_query + ";"
         return sql_string
-    
-    return ""
 
 def convert_to_xml(text):
     noun,fields,value = text
@@ -92,7 +90,7 @@ def convert_to_xml(text):
                 xml_a += "\t\t\t<username>" + tuple[3] + "</username>\n" 
                 xml_a += "\t\t\t<email>" + tuple[4] + "</email>\n" 
                 if(noun == "profesor"):
-                    xml_a+= "\t\t\t<departman>" + tuple[5] + "</departman>\n" 
+                    xml_a+= "\t\t\t<department>" + tuple[5] + "</department>\n" 
                 elif(noun == "student"):
                     xml_a+= "\t\t\t<year_of_study>" + str(tuple[5]) + "</year_of_study>\n" 
             else:
