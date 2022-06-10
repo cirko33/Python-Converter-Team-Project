@@ -10,7 +10,7 @@ from mysql.connector import Error
 
 mysql_host = "localhost"
 mysql_database = "res"
-mysql_user, mysql_password = "resres_projekat", "restim20"
+mysql_user, mysql_password = "res_projekat", "restim20"
 
 config = {
     'host' : mysql_host,

@@ -95,8 +95,11 @@ def convert_to_xml(text):
                     xml_a+= "\t\t\t<year_of_study>" + str(tuple[5]) + "</year_of_study>\n" 
             else:
                 field_splitted = fields.split(", ")
-                for index in range(len(tuple)):
-                    xml_a += "\t\t\t<" + field_splitted[index] + ">" + str(tuple[index]) + "</" + field_splitted[index] + ">\n"
+                if(len(tuple) != 1):
+                    for index in range(len(tuple)):
+                        xml_a += "\t\t\t<" + field_splitted[index] + ">" + str(tuple[index]) + "</" + field_splitted[index] + ">\n"
+                else:
+                    xml_a += "\t\t\t<" + fields + ">" + str(tuple[0]) + "</" + fields + ">\n"
             return xml_a
        
         xml_answer += "\t<payload>\n"
