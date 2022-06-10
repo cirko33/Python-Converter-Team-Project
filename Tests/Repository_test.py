@@ -20,6 +20,7 @@ class TestRepository(database_mock):
             self.assertEqual(RepositoryCommands.send_request("delete from korisnik_test where id=6;"), ("korisnik_test", "delete", 1))
             self.assertEqual(RepositoryCommands.send_request("delete from student_test where id like '%2020';"), ("student_test", "delete", 1))
             self.assertEqual(RepositoryCommands.send_request("delete from profesor_test where department = 'ESI' and username = 'marinas';"), ("profesor_test", "delete", 0))
+            self.assertEqual(RepositoryCommands.send_request("update student_test set name = 'Pera'"), ("student_test", "update", 8))
 
     def test_query_value(self):
         with self.mock_db_config:
@@ -31,3 +32,4 @@ class TestRepository(database_mock):
             self.assertEqual(RepositoryCommands.send_request("insert into korisnik_test value(100, 'Nikola', 'Petrovic', 'dzoni', 'dzoni@hotmail.com', 'EEPSI');"), ("REJECTED", 3000, "Not valid query for modify data: 1136 (21S01): Column count doesn't match value count at row 1"))
             self.assertEqual(RepositoryCommands.send_request("update korisnik_test set id = 'jedan' where id = 1;"), ("REJECTED", 3000, "Not valid query for modify data: 1366 (HY000): Incorrect integer value: 'jedan' for column 'id' at row 1"))
             self.assertEqual(RepositoryCommands.send_request("update profesor_test set email = 'atlagic@uns.ac.rs' where id = 1;"), ("REJECTED", 3000, "Not valid query for modify data: 1062 (23000): Duplicate entry 'atlagic@uns.ac.rs' for key 'profesor_test.email'"))
+           
