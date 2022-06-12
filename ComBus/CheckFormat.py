@@ -27,7 +27,7 @@ def check_xml_format(xml_request):
 
         #If there is any invalid character
         for char in xml_query:
-            if not char.isalnum() and char not in [";", "=", "'", " ", "_"]:
+            if not char.isalnum() and char not in [";", "=", "'", " ", "_", "@", "."]:
                 return "<response><status>BAD_FORMAT</status><status_code>5000</status_code><payload>Invalid characters in query</payload></response>"
 
         #Does every query have '=' 
@@ -49,7 +49,7 @@ def check_xml_format(xml_request):
 
         if xml_verb == "PATCH":
             for char in xml_field:
-                if not char.isalnum() and char not in [";", "=", "'", " ", "_"]:
+                if not char.isalnum() and char not in [";", "=", "'", " ", "_", "@", "."]:
                     return "<response><status>BAD_FORMAT</status><status_code>5000</status_code><payload>Invalid character in patch fields</payload></response>"
 
             #Does every patch_field have '=' 
@@ -60,7 +60,7 @@ def check_xml_format(xml_request):
         else:
             #If there is any wrong character
             for char in xml_field:
-                if not char.isalnum() and char not in [";", " ", "_"]:
+                if not char.isalnum() and char not in [";", " ", "_", "*"]:
                     return "<response><status>BAD_FORMAT</status><status_code>5000</status_code><payload>Invalid character in fields</payload></response>"
     else:
         if xml_verb == "PATCH":
