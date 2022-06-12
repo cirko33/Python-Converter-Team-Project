@@ -1,4 +1,4 @@
-from CheckFormat import *
+from CheckFormat import check_xml_format
 import sys
 sys.path.insert(0, "..")
 from Connection.Server import Server

@@ -5,13 +5,6 @@ from mysql.connector import Error
 from mock import patch
 from Repository import RepositoryCommands
 
-# def load():
-#     file = open("RepositoryAuthentication.txt")
-#     username = file.readline()
-#     password = file.readline()
-#     file.close()
-#     return username, password
-
 mysql_host = "localhost"
 mysql_user, mysql_password = "res_projekat", "restim20"
 mysql_database = "res_test"

@@ -1,5 +1,5 @@
 import sys, time, keyboard
-from Requests import *
+from Requests import request
 sys.path.insert(0, "..")
 from Connection.Client import Client
 

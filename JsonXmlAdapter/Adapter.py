@@ -1,4 +1,4 @@
-from JSONXMLConverter import *
+from JSONXMLConverter import convert_to_json, convert_to_xml
 import sys
 sys.path.insert(0, "..")
 

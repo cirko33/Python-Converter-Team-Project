@@ -1,13 +1,6 @@
 import mysql.connector
 from mysql.connector import Error
 
-# def load():
-#     file = open("RepositoryAuthentication.txt")
-#     username = file.readline()
-#     password = file.readline()
-#     file.close();
-#     return username, password
-
 mysql_host = "localhost"
 mysql_database = "res"
 mysql_user, mysql_password = "res_projekat", "restim20"
