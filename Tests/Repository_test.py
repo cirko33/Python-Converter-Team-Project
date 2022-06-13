@@ -1,7 +1,7 @@
 import sys
 sys.path.insert(0, "..")
 
-from Repository.RepositoryMock import database_mock
+from RepositoryMock import database_mock
 from mock import patch
 from Repository import RepositoryCommands
 

@@ -1,8 +1,8 @@
-
 from unittest import TestCase
-import mysql.connector
 from mysql.connector import Error
 from mock import patch
+import mysql.connector, sys
+sys.path.insert(0,"..")
 from Repository import RepositoryCommands
 
 mysql_host = "localhost"
