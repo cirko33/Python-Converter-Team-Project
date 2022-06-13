@@ -1,10 +1,11 @@
 def convert_to_sql(xml_text):
     sql_string = "";   
+    sql_where = " where "
 
     def find(string):
         start_index = xml_text.find("<" + string + ">") + len(string) + 2
         end_index = xml_text.find("</" + string + ">")
-        if(start_index == -1 or end_index == -1):
+        if(end_index == -1):
             sql_part = ""
         else:            
             sql_part = xml_text[start_index:end_index]        
@@ -24,10 +25,8 @@ def convert_to_sql(xml_text):
         else:
             sql_fields = sql_fields.replace(";",",")
         sql_noun = " from " + sql_noun[1:-2]     
-        if(sql_query == ""):
-            sql_query = ""        
-        else:
-            sql_query = " where " + sql_query  
+        if(sql_query != ""):
+            sql_query = sql_where + sql_query  
             sql_query = sql_query.replace(";"," and")
         sql_string = sql_verb + sql_fields + sql_noun + sql_query + ";"
         return sql_string 
@@ -41,9 +40,8 @@ def convert_to_sql(xml_text):
         sql_queries = sql_query.split(";")
         for temp in sql_queries:          
             sql_field = sql_field + temp.split('=')[0] + "," 
-        sql_field = sql_field[0:-1] + (") values(")
-        for temp in sql_queries:
             sql_value = sql_value + temp.split('=')[1] + ", " 
+        sql_field = sql_field[0:-1] + (") values(") 
         sql_value = sql_value[0:-2] + (")")
         sql_string = sql_verb + sql_noun + sql_field + sql_value + ";"
         return sql_string 
@@ -53,7 +51,7 @@ def convert_to_sql(xml_text):
         sql_verb = "update "
         sql_noun = sql_noun[1:-2] + " set "  
         sql_fields = sql_fields.replace(";",",")
-        sql_query = " where " + sql_query  
+        sql_query = sql_where + sql_query  
         sql_query = sql_query.replace(";"," and")
         sql_string = sql_verb + sql_noun + sql_fields + sql_query + ";"
         return sql_string 
@@ -62,7 +60,7 @@ def convert_to_sql(xml_text):
     elif(sql_verb == "DELETE"): 
         sql_verb = "delete"
         sql_noun = " from " + sql_noun[1:-2]        
-        sql_query = " where " + sql_query  
+        sql_query = sql_where + sql_query  
         sql_query = sql_query.replace(";"," and")
         sql_string = sql_verb + sql_noun + sql_query + ";"
         return sql_string
@@ -113,3 +111,5 @@ def convert_to_xml(text):
     
     xml_answer += "</response>"
     return xml_answer
+
+print(convert_to_sql('<request>\n\t<verb>GET</verb>\n\t<noun>/korisnik/1</noun>\n\t<fields>id; name; username</fields>\n</request>'))
