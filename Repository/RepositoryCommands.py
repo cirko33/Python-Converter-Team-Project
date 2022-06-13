@@ -1,16 +1,9 @@
 import mysql.connector
 from mysql.connector import Error
 
-# def load():
-#     file = open("RepositoryAuthentication.txt")
-#     username = file.readline()
-#     password = file.readline()
-#     file.close();
-#     return username, password
-
 mysql_host = "localhost"
 mysql_database = "res"
-mysql_user, mysql_password = "resres_projekat", "restim20"
+mysql_user, mysql_password = "res_projekat", "restim20"
 
 config = {
     'host' : mysql_host,
@@ -23,8 +16,8 @@ def read_items(query):
     try:
         connection = mysql.connector.connect(**config)
         cursor = connection.cursor()
-    except Error:
-        return ("REJECTED", 3000, "Error at MySQL connection")
+    except Error as err:
+        return ("REJECTED", 3000, f"Error at MySQL connection: {err}")
 
     try:
         cursor.execute(query)
@@ -54,8 +47,8 @@ def execute_rest(query):
     try:
         connection = mysql.connector.connect(**config)
         cursor = connection.cursor()
-    except Error:
-        return ("REJECTED", 3000, "Error at MySQL connection")
+    except Error as err:
+        return ("REJECTED", 3000, f"Error at MySQL connection: {err}")
 
     try:
         cursor.execute(query)
@@ -63,7 +56,7 @@ def execute_rest(query):
         cursor.close()
         connection.close()
 
-        return ("REJECTED", 3000, f'Not valid query for reading data: {e}')
+        return ("REJECTED", 3000, f'Not valid query for modify data: {e}')
     
     connection.commit()
     splited_query = query.split(" ")

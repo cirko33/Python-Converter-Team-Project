@@ -1,4 +1,4 @@
-from XMLDataBaseConverter import *
+from XMLDataBaseConverter import convert_to_xml, convert_to_sql
 import sys
 sys.path.insert(0, "..")
 from Connection.Client import Client

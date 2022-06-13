@@ -1,13 +1,13 @@
-from CheckFormat import *
+from CheckFormat import check_xml_format
 import sys
 sys.path.insert(0, "..")
 from Connection.Server import Server
 
 if __name__ == '__main__':
-    web_client_soc = Server(8000)
     json_xml_soc = Server(8001)
     xml_db_soc = Server(8002)
-
+    web_client_soc = Server(8000)
+    
     while True:
         req = web_client_soc.receive()
         if req.__len__() == 0:

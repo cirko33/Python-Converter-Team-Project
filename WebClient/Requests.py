@@ -28,9 +28,9 @@ def request():
             field = random.choice(fields)
     elif verb == '"PATCH"':
         if "korisnik" in noun:
-            field = random.choice(query[:4])
+            field = random.choice(queries[:4])
         else:
-            field = random.choice(query)
+            field = random.choice(queries)
     else:
         field = ""
     
