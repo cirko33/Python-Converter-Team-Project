@@ -33,7 +33,7 @@ def check_xml_format(xml_request):
         #Does every query have '=' 
         queries = xml_query.split(";")
         for query in queries:
-            if "=" not in query and "<" not in query and ">" not in query:
+            if "=" not in query:
                 return "<response><status>BAD_FORMAT</status><status_code>5000</status_code><payload>Missing '=' in query</payload></response>"
     else:
         if xml_verb == "POST":

@@ -114,5 +114,3 @@ def convert_to_xml(text):
     
     xml_answer += "</response>"
     return xml_answer
-
-print(convert_to_sql('<request>\n\t<verb>GET</verb>\n\t<noun>/korisnik/1</noun>\n\t<fields>id; name; username</fields>\n</request>'))
