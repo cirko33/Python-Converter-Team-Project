@@ -1,5 +1,5 @@
 import time
-from socket import *
+from socket import AF_INET, SOCK_STREAM, gethostname, socket, SHUT_RDWR
 
 class Client:
     def __init__(self, port):
@@ -42,5 +42,4 @@ class Client:
         return ret
 
     def close(self):
-        self.con.shutdown(SHUT_RDWR)
         self.con.close()

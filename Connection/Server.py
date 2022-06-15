@@ -1,4 +1,4 @@
-from socket import *
+from socket import AF_INET, SOCK_STREAM, gethostname, socket
 class Server:
     def __init__(self, port):
         self.s = socket(AF_INET, SOCK_STREAM)
