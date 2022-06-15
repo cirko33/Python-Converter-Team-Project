@@ -10,9 +10,6 @@ if __name__ == '__main__':
         c.send(request())
 
         ret = c.receive()
-        if len(ret) == 0:
-            c.close()
-            break
 
         print("Press x for exit:")
         for i in range(50):

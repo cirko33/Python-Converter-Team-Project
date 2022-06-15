@@ -9,9 +9,6 @@ if __name__ == "__main__":
     
     while True:
         pack = c.receive()
-        if len(pack) == 0:
-            c.close()
-            break
         
         if pack.startswith('<'):
             print("Converting to JSON")

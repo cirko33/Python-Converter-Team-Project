@@ -8,9 +8,7 @@ if __name__ == '__main__':
     s = Server(8003)
     while True:
         req = s.receive()
-        if len(req) == 0:
-            s.close()
-            break
+        
         status, status_code, response = send_request(req)
         send_data(s, (status, status_code, response))
         

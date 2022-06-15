@@ -9,8 +9,6 @@ if __name__ == '__main__':
     rep = Client(8003)
     while True:
         req = combus.receive()
-        if req.__len__() == 0:
-            break
 
         sql_req = convert_to_sql(req)
 

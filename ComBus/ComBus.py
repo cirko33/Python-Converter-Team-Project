@@ -10,8 +10,7 @@ if __name__ == '__main__':
     
     while True:
         req = web_client_soc.receive()
-        if req.__len__() == 0:
-            break
+        
         print("Received request from Web Client and forward to JSONXMLAdapter: " + req )
         json_xml_soc.send(req)
 
@@ -38,7 +37,3 @@ if __name__ == '__main__':
         
         print("Forward to Web Client")
         web_client_soc.send(json_res)
-    
-    web_client_soc.close()
-    json_xml_soc.close()
-    xml_db_soc.close()
