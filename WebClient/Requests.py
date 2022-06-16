@@ -2,8 +2,8 @@ import random
 
 verbs = ['"GET"', '"POST"', '"PATCH"', '"DELETE"']
 nouns = ['"/korisnik/1"', '"/student/1"', '"/profesor/1"']
-queries = ['"name = \'Luka\'"', '"username = \'jelovopopov\'"', '"username = \'dekikuki\'"', '"name = \'Petar\'"', '"year_of_study = 3; name = \'Dejan\'"', '"department = \'EEPSI\'"']
-fields = ['"*"', '"id; name; email"', '"id; name; lastname"', '"id; username"', '"name; lastname; department"', '"name; lastname; year_of_study"']
+queries = ['"id = 1"', '"email = \'atlagic@uns.ac.rs\'"', '"name = \'Milan\'"', '"lastname = \'Milinkovic\'"', '"name = \'Luka\'"', '"username = \'jelovopopov\'"', '"username = \'dekikuki\'"', '"name = \'Petar\'"', '"year_of_study = 3; name = \'Dejan\'"', '"department = \'EEPSI\'"']
+fields = ['"*"','"id"', '"name; lastname"', '"email"', '"year_of_study"', '"id; name; email"', '"id; name; lastname"', '"id; username"', '"name; lastname; department"', '"name; lastname; year_of_study"']
 
 def request():
     verb = random.choice(verbs)
@@ -23,12 +23,12 @@ def request():
 
     if verb == '"GET"':
         if "korisnik" in noun:
-            field = random.choice(fields[:4])
+            field = random.choice(fields[:8])
         else:
             field = random.choice(fields)
     elif verb == '"PATCH"':
         if "korisnik" in noun:
-            field = random.choice(queries[:4])
+            field = random.choice(queries[:8])
         else:
             field = random.choice(queries)
     else:
