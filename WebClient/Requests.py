@@ -2,7 +2,7 @@ import random
 
 verbs = ['"GET"', '"POST"', '"PATCH"', '"DELETE"']
 nouns = ['"/korisnik/1"', '"/student/1"', '"/profesor/1"']
-queries = ['"id = 1"', '"email = \'atlagic@uns.ac.rs\'"', '"name = \'Milan\'"', '"lastname = \'Milinkovic\'"', '"name = \'Luka\'"', '"username = \'jelovopopov\'"', '"username = \'dekikuki\'"', '"name = \'Petar\'"', '"year_of_study = 3; name = \'Dejan\'"', '"department = \'EEPSI\'"']
+queries = ['"id = 1"', '"email = \'atlagic@uns.ac.rs\'"', '"name = \'Milan\'"', '"lastname = \'Milinkovic\'"', '"name = \'Luka\'"', '"username = \'jelovopopov\'"', '"username = \'dekikuki\'"', '"name = \'Petar\'"', '"year_of_study = 3; name = \'Dejan\'"', '"department = \'EEPSI\'"', '"name"']
 fields = ['"*"','"id"', '"name; lastname"', '"email"', '"year_of_study"', '"id; name; email"', '"id; name; lastname"', '"id; username"', '"name; lastname; department"', '"name; lastname; year_of_study"']
 
 def request():
